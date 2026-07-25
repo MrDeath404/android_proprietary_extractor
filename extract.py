@@ -194,7 +194,7 @@ for dex in dex_list:
 
     mk.write(f"\t{dex_name}")
 
-    if etc != etc_list[len(etc_list)-1]:
+    if dex != dex_list[len(dex_list)-1]:
         mk.write(" \\\n")
 
 if len(app_list) > 0:
