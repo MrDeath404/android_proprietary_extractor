@@ -81,7 +81,7 @@ def get_shared_libs(filepath):
     return libs
 
 def get_partition_specific(path):
-    match str(path).split("/", 1)[0]:
+    match str(path).removeprefix("proprietary/").split("/", 2)[0]:
         case "vendor":
             return "vendor_specific: true"
         case "system_ext":
