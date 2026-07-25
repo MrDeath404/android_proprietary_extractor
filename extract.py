@@ -245,6 +245,7 @@ for binary in binary_list:
         bp.write("\t\t},\n")
     bp.write("\t},\n")
     bp.write(f"\tcompile_multilib: \"{"both" if len(abi) == 2 else abi[0]}\",\n")
+    bp.write("\tcheck_elf_files: false,\n")
     bp.write("\tprefer: true,\n")
     if sub_dir != binary:
         bp.write(f"\trelative_install_path: \"{sub_dir}\",\n")
@@ -262,8 +263,9 @@ if len(library_shared_list) > 0:
 for library_shared in library_shared_list:
     find_and_copy_file(library_shared)
     paths = list(Path("proprietary").rglob(library_shared))
+    lib_name = library_shared.rsplit(".", 1)[0]
     bp.write("\ncc_prebuilt_binary {\n")
-    bp.write(f"\tname: \"{library_shared}\",\n")
+    bp.write(f"\tname: \"{lib_name}\",\n")
     bp.write("\tstrip: {\n\t\tnone: true,\n\t},\n")
     bp.write("\ttarget: {\n")
     abi = []
@@ -282,6 +284,7 @@ for library_shared in library_shared_list:
         bp.write("\t\t},\n")
     bp.write("\t},\n")
     bp.write(f"\tcompile_multilib: \"{"both" if len(abi) == 2 else abi[0]}\",\n")
+    bp.write("\tcheck_elf_files: false,\n")
     bp.write("\tprefer: true,\n")
     sub_dir = str(paths[0]).split(f"lib{abi[0]}/", 1)[1].rsplit("/", 1)[0]
     if sub_dir != library_shared:
@@ -289,7 +292,7 @@ for library_shared in library_shared_list:
     bp.write("\tsoc_specific: true,\n")
     bp.write("}\n")
 
-    mk.write(f"\t{library_shared}")
+    mk.write(f"\t{lib_name}")
 
     if library_shared != library_shared_list[len(library_shared_list)-1]:
         mk.write(" \\\n")
