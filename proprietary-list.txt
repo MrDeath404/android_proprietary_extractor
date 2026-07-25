@@ -1,6 +1,8 @@
 #
 #   Guide how to use:
 #
+#   python extract.py [path from where to extract]
+#
 #   Override default entry file (Android.mk)
 #   target-file:[string]
 #
@@ -11,6 +13,18 @@
 #
 #   Set custom path variable (See example_template.txt)
 #   path-variable:[string]
+#
+#   Simlinks:
+#   Are used to for example change system_support/vendor to just vendor
+#
+#   Create simlink:
+#   simlink:[for example "system_support/vendor"]>[for example "vendor"]
+#
+#   How this example would look:
+#   simlink:system_support/vendor>vendor
+# 
+#   Remmember to define for example this next simlink below:
+#   simlink:system_support>system
 #
 #   Extracting files:
 #
