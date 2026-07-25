@@ -1,0 +1,39 @@
+#
+#   Guide how to use:
+#
+#   Override default entry file (Android.mk)
+#   target-file:[string]
+#
+#   Set custom template (See example_template.txt)
+#   template-file:[string]
+#
+#   If template file does not contain custom path variable it will auto add LOCAL_PATH and use it instead
+#
+#   Set custom path variable (See example_template.txt)
+#   path-variable:[string]
+#
+#   Extracting files:
+#
+#   Note extractor will detect sub directory or relative install path where file needs to be install
+#   Note extractor will detect if app is privileged
+#   Note extractor will find all arch of a binary or library and include them
+#   Note extractor will detect all shared libraries of a binary or library and include them
+#
+#   Find and import as prebuilt_etc
+#   etc:[name of a file to find]
+#
+#   Find and import as prebuilt_etc_xml
+#   etc_xml:[name of a file to find]
+#
+#   Find and import as prebuilt_dex
+#   dex:[name of a file to find]
+#
+#   Find and import as android_app_import
+#   app:[name of a file to find]
+#
+#   Find and import as cc_prebuilt_binary
+#   binary:[name of a file to find]
+#
+#   Find and import as cc_prebuilt_binary
+#   library-shared:[name of a file to find]
+#

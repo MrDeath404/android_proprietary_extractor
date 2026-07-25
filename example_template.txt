@@ -1,0 +1,13 @@
+// This entire file will be injected into the generated file at the beginning
+
+// Setting custom path variable
+
+DOLBY_ATMOS_PATH := vendor/motorola/dolby_atmos
+
+PRODUCT_SOONG_NAMESPACES += \
+    $(DOLBY_ATMOS_PATH)
+
+// End of custom path variable
+
+BOARD_VENDOR_SEPOLICY_DIRS += \
+	$(DOLBY_ATMOS_PATH)/sepolicy/vendor
