@@ -236,7 +236,7 @@ for binary in binary_list:
         else:
             abi.append("32")
         arch = "arm64" if abi[len(abi)-1] == "64" else "arm"
-        bp.write(f"\t\tandroid_{arch} {{\n")
+        bp.write(f"\t\tandroid_{arch}: {{\n")
         bp.write(f"\t\t\tsrcs: [\"{path}\"],\n")
         bp.write("\t\t\tshared_libs: [\n")
         for lib in get_shared_libs(path):
@@ -273,7 +273,7 @@ for library_shared in library_shared_list:
         else:
             abi.append("")
         arch = "arm64" if abi[len(abi)-1] == "64" else "arm"
-        bp.write(f"\t\tandroid_{arch} {{\n")
+        bp.write(f"\t\tandroid_{arch}: {{\n")
         bp.write(f"\t\t\tsrcs: [\"{path}\"],\n")
         bp.write("\t\t\tshared_libs: [\n")
         for lib in get_shared_libs(path):
