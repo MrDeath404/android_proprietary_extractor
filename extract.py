@@ -264,7 +264,7 @@ for library_shared in library_shared_list:
     find_and_copy_file(library_shared)
     paths = list(Path("proprietary").rglob(library_shared))
     lib_name = library_shared.rsplit(".", 1)[0]
-    bp.write("\ncc_prebuilt_binary {\n")
+    bp.write("\ncc_prebuilt_library_shared {\n")
     bp.write(f"\tname: \"{lib_name}\",\n")
     bp.write("\tstrip: {\n\t\tnone: true,\n\t},\n")
     bp.write("\ttarget: {\n")
