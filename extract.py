@@ -76,7 +76,7 @@ def get_shared_libs(filepath):
     libs = []
     for line in result.stdout.splitlines():
         if '(NEEDED)' in line:
-            lib = line.split('[')[-1].rstrip(']')
+            lib = line.split('[')[-1].rstrip(']').rsplit(".", 1)[0]
             libs.append(lib)
     return libs
 
