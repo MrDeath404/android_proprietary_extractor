@@ -83,7 +83,7 @@ def get_shared_libs(filepath):
 def get_partition_specific(path):
     match str(path).removeprefix("proprietary/").split("/", 2)[0]:
         case "vendor":
-            return "vendor_specific: true"
+            return "soc_specific: true"
         case "system_ext":
             return "system_ext_specific: true"
         case "product":
@@ -272,7 +272,6 @@ for binary in binary_list:
     bp.write("\tprefer: true,\n")
     if sub_dir != binary:
         bp.write(f"\trelative_install_path: \"{sub_dir}\",\n")
-    bp.write("\tsoc_specific: true,\n")
     partition = get_partition_specific(paths[0])
     if partition is not None:
         bp.write(f"\t{partition},\n")
@@ -315,7 +314,6 @@ for library_shared in library_shared_list:
     sub_dir = str(paths[0]).split(f"lib{abi[0]}/", 1)[1].rsplit("/", 1)[0]
     if sub_dir != library_shared:
         bp.write(f"\trelative_install_path: \"{sub_dir}\",\n")
-    bp.write("\tsoc_specific: true,\n")
     partition = get_partition_specific(paths[0])
     if partition is not None:
         bp.write(f"\t{partition},\n")
