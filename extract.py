@@ -244,7 +244,7 @@ for binary in binary_list:
         bp.write("\t\t\t],\n")
         bp.write("\t\t},\n")
     bp.write("\t},\n")
-    bp.write(f"\tcompile_multilib: \"{"both" if len(abi) == 2 else abi[0]}\"\n")
+    bp.write(f"\tcompile_multilib: \"{"both" if len(abi) == 2 else abi[0]}\",\n")
     bp.write("\tprefer: true,\n")
     if sub_dir != binary:
         bp.write(f"\trelative_install_path: \"{sub_dir}\",\n")
@@ -281,7 +281,7 @@ for library_shared in library_shared_list:
         bp.write("\t\t\t],\n")
         bp.write("\t\t},\n")
     bp.write("\t},\n")
-    bp.write(f"\tcompile_multilib: \"{"both" if len(abi) == 2 else abi[0]}\"\n")
+    bp.write(f"\tcompile_multilib: \"{"both" if len(abi) == 2 else abi[0]}\",\n")
     bp.write("\tprefer: true,\n")
     sub_dir = str(paths[0]).split(f"lib{abi[0]}/", 1)[1].rsplit("/", 1)[0]
     if sub_dir != library_shared:
