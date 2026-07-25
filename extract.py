@@ -80,6 +80,17 @@ def get_shared_libs(filepath):
             libs.append(lib)
     return libs
 
+def get_partition_specific(path):
+    match str(path).split("/", 1)[0]:
+        case "vendor":
+            return "vendor_specific: true"
+        case "system_ext":
+            return "system_ext_specific: true"
+        case "product":
+            return "product_specific: true"
+        case _:
+            return None
+
 with open("proprietary-list.txt", "r") as file:
     for line in file:
         line = line.strip()
@@ -153,6 +164,9 @@ for etc in etc_list:
     if sub_dir != etc:
         bp.write(f"\tsub_dir: \"{sub_dir}\",\n")
     bp.write("\tfilename_from_src: true,\n")
+    partition = get_partition_specific(paths[0])
+    if partition is not None:
+        bp.write(f"\t{partition},\n")
     bp.write("}\n")
 
     mk.write(f"\t{etc}")
@@ -173,6 +187,9 @@ for etc_xml in etc_xml_list:
     if sub_dir != etc_xml:
         bp.write(f"\tsub_dir: \"{sub_dir}\",\n")
     bp.write("\tfilename_from_src: true,\n")
+    partition = get_partition_specific(paths[0])
+    if partition is not None:
+        bp.write(f"\t{partition},\n")
     bp.write("}\n")
 
     mk.write(f"\t{etc_xml}")
@@ -190,6 +207,9 @@ for dex in dex_list:
     bp.write("\ndex_import {\n")
     bp.write(f"\tname: \"{dex_name}\",\n")
     bp.write(f"\tjars: [\"{paths[0]}\"],\n")
+    partition = get_partition_specific(paths[0])
+    if partition is not None:
+        bp.write(f"\t{partition},\n")
     bp.write("}\n")
 
     mk.write(f"\t{dex_name}")
@@ -211,6 +231,9 @@ for app in app_list:
     bp.write("\tdex_preopt: {\n\t\tenabled: false,\n\t},\n")
     if str(paths[0]).find("priv-app") != -1:
          bp.write("\tprivileged: true,\n")
+    partition = get_partition_specific(paths[0])
+    if partition is not None:
+        bp.write(f"\t{partition},\n")
     bp.write("}\n")
 
     mk.write(f"\t{app_name}")
@@ -250,6 +273,9 @@ for binary in binary_list:
     if sub_dir != binary:
         bp.write(f"\trelative_install_path: \"{sub_dir}\",\n")
     bp.write("\tsoc_specific: true,\n")
+    partition = get_partition_specific(paths[0])
+    if partition is not None:
+        bp.write(f"\t{partition},\n")
     bp.write("}\n")
 
     mk.write(f"\t{binary}")
@@ -290,6 +316,9 @@ for library_shared in library_shared_list:
     if sub_dir != library_shared:
         bp.write(f"\trelative_install_path: \"{sub_dir}\",\n")
     bp.write("\tsoc_specific: true,\n")
+    partition = get_partition_specific(paths[0])
+    if partition is not None:
+        bp.write(f"\t{partition},\n")
     bp.write("}\n")
 
     mk.write(f"\t{lib_name}")
